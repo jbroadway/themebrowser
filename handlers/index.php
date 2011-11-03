@@ -1,7 +1,7 @@
 <?php
 
-// thumbs: 290x213
-// screens: 1131x932
+// thumbs: 210x150
+// screens: 1050x750
 
 require_once ('apps/filemanager/lib/Functions.php');
 
@@ -21,7 +21,6 @@ $o->next = $o->num + 2;
 
 if (count ($o->themes) == 0) {
 	echo '<p>' . i18n_get ('No themes available') . '</p>';
-	return;
 }
 
 $page->add_script ('<script src="/apps/filemanager/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>');

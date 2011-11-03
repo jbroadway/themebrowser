@@ -1,0 +1,16 @@
+{% if num > 1 %}
+<p class="previous"><a href="/{{ page.id }}/{{ num }}">&laquo; {" Newer themes "}</a></p>
+{% elseif num == 1 %}
+<p class="previous"><a href="/{{ page.id }}">&laquo; {" Newer themes "}</a></p>
+{% end %}
+
+{% foreach themes %}
+	<div id="theme">
+		<h3><a href="{{ loop_value->link }}">{{ loop_value->name }}</a></h3>
+		<a href="{{ loop_value->screenshot }}"><img src="{{ loop_value->screenshot|filemanager_get_thumbnail (%s, 290, 213) }}" /></a>
+	</div>
+{% end %}
+
+{% if more %}
+<p class="next"><a href="/{{ page.id }}/{{ next }}">{" Older themes "} &raquo;</a></p>
+{% end %}

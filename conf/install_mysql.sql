@@ -3,7 +3,6 @@ create table themebrowser_theme (
 	name char(48) not null,
 	ts datetime not null,
 	link char(72) not null,
-	thumbnail char(72) not null,
 	screenshot char(72) not null,
 	index (name),
 	index (ts)

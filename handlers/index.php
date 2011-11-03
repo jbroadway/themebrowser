@@ -24,6 +24,9 @@ if (count ($o->themes) == 0) {
 	return;
 }
 
+page_add_script ('<script src="/apps/themebrowser/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>');
+page_add_script ('<link rel="stylesheet" href="/apps/themebrowser/js/fancybox/jquery.fancybox-1.3.4.css" />');
+
 echo $tpl->render ('themebrowser/index', $o);
 
 ?>

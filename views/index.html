@@ -1,12 +1,10 @@
 <script>
 $(function () {
-	$('a.fancy').fancybox ();
-	$('.theme').hover (function () {
-		$(this).children ('.thumb-back').children ('img').css ('opacity', 0.5);
-		$(this).children ('.thumb-front').show ();
+	$('a.fancy').fancybox ({padding: 0});
+	$('.thumb').hover (function () {
+		$(this).children ('.thumb-front').fadeIn (200);
 	}, function () {
-		$(this).children ('.thumb-back').children ('img').css ('opacity', 1);
-		$(this).children ('.thumb-front').hide ();
+		$(this).children ('.thumb-front').fadeOut (200);
 	});
 });
 </script>
@@ -15,31 +13,55 @@ $(function () {
 	float: left;
 	margin-right: 10px;
 }
-.thumb-back, .thumb-front {
+.thumb {
 	width: 210px;
 	height: 150px;
 	padding: 0;
 	margin: 0;
-}
-.thumb-back {
-	background: #000;
 	border: 3px solid #ccc;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	position: relative;
+}
+.thumb-back, .thumb-front {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 210px;
+	height: 150px;
+	padding: 0;
+	margin: 0;
+	border: 0;
 }
 .thumb-front {
 	display: none;
-	margin-top: -150px;
+	z-index: 100;
+	background: rgba(0,0,0,.6);
 }
-	.thumb-front a {
-		background: #ccc;
-		border: 3px solid #ccc;
-		-webkit-border-radius: 2px;
-		-moz-border-radius: 2px;
-		border-radius: 2px;
+	.thumb-front p {
+		margin: 65px 0px 0px 30px;
+		padding: 0;
 	}
-h3 span.admin {
+	.thumb-front p a {
+		background: #ccc;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		padding: 3px 5px 3px 5px;
+		-webkit-box-shadow: 0px 0px 3px #000;
+		-moz-box-shadow: 0px 0px 3px #000;
+		box-shadow: 0px 0px 3px #000;
+	}
+	.thumb-front p a:hover {
+		text-decoration: none;
+		background: #ddd;
+	}
+.theme h3 {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+.theme h3 span.admin {
 	font-size: 0.8em;
 	font-weight: normal;
 }
@@ -60,12 +82,15 @@ h3 span.admin {
 		<h3><a href="{{ loop_value->link }}">{{ loop_value->name }}</a>
 		{% if User::require_admin () %}<span class="admin"><a href="/themebrowser/edit?id={{ loop_value->id }}&return=/{{ page.id }}">{" Edit "}</a> | <a href="/themebrowser/delete?id={{ loop_value->id }}&return=/{{ page.id }}" onclick="return confirm ('{" Are you sure you want to delete this theme? "}')">{" Delete "}</a></span>{% end %}
 		</h3>
+		<div class="thumb">
 		<div class="thumb-back">
 			<img src="/{{ loop_value->screenshot|filemanager_get_thumbnail (%s, 210, 150) }}" />
 		</div>
 		<div class="thumb-front">
-			<a href="/{{ loop_value->screenshot }}" class="fancy">Preview</a>
-			<a href="{{ loop_value->link }}">Website</a>
+			<p><a href="/{{ loop_value->screenshot }}" class="fancy">Preview</a>
+			&nbsp;
+			<a href="{{ loop_value->link }}">Website</a></p>
+		</div>
 		</div>
 	</div>
 {% end %}

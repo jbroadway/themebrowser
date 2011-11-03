@@ -1,8 +1,45 @@
 <script>
 $(function () {
-	$('.theme a').fancybox ();
+	$('a.fancy').fancybox ();
+	$('.theme').hover (function () {
+		$(this).children ('.thumb-back').children ('img').css ('opacity', 0.5);
+		$(this).children ('.thumb-front').show ();
+	}, function () {
+		$(this).children ('.thumb-back').children ('img').css ('opacity', 1);
+		$(this).children ('.thumb-front').hide ();
+	});
 });
 </script>
+<style>
+.theme {
+	float: left;
+	margin-right: 10px;
+}
+.thumb-back, .thumb-front {
+	width: 210px;
+	height: 150px;
+	padding: 0;
+	margin: 0;
+}
+.thumb-back {
+	background: #000;
+	border: 3px solid #ccc;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+.thumb-front {
+	display: none;
+	margin-top: -150px;
+}
+	.thumb-front a {
+		background: #ccc;
+		border: 3px solid #ccc;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+	}
+</style>
 
 {% if num > 1 %}
 <p class="previous"><a href="/{{ page.id }}/{{ num }}">&laquo; {" Newer themes "}</a></p>
@@ -13,9 +50,17 @@ $(function () {
 {% foreach themes %}
 	<div class="theme">
 		<h3><a href="{{ loop_value->link }}">{{ loop_value->name }}</a></h3>
-		<a href="/{{ loop_value->screenshot }}"><img src="/{{ loop_value->screenshot|filemanager_get_thumbnail (%s, 290, 213) }}" /></a>
+		<div class="thumb-back">
+			<img src="/{{ loop_value->screenshot|filemanager_get_thumbnail (%s, 210, 150) }}" />
+		</div>
+		<div class="thumb-front">
+			<a href="/{{ loop_value->screenshot }}" class="fancy">Preview</a>
+			<a href="{{ loop_value->link }}">Website</a>
+		</div>
 	</div>
 {% end %}
+
+<br clear="both" />
 
 {% if more %}
 <p class="next"><a href="/{{ page.id }}/{{ next }}">{" Older themes "} &raquo;</a></p>

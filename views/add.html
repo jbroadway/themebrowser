@@ -1,0 +1,34 @@
+<script type="text/javascript" src="/js/jquery.verify_values.js"></script>
+<script type="text/javascript">
+$(function () {
+	$('#add-form').verify_values ({
+		handler: 'themebrowser/add',
+		callback: function (failed) {
+			// highlight the failed elements
+			for (var i = 0; i < failed.length; i++) {
+				$('#' + failed[i] + '-notice').show ();
+			}
+		},
+		reset: function (fields) {
+			for (var i = 0; i < fields.length; i++) {
+				$('#' + fields[i] + '-notice').hide ();
+			}
+		}
+	});
+	{% foreach failed %}
+	$('#{{ loop_value }}-notice').show ();
+	{% end %}
+});
+</script>
+<form method="POST" id="add-form">
+<p>{"Theme Name"}:<br /><input type="text" name="name" size="30" value="{{ name }}" />
+<span class="notice" id="name-notice">{"You must enter a theme name."}</span></p>
+<p>{"Link"}:<br /><input type="text" name="link" size="50" value="{{ link }}" />
+<span class="notice" id="link-notice">{"You must enter a link."}</span></p>
+<p>{"Screenshot"}:<br /><input type="text" name="screenshot" size="50" value="{{ screenshot }}" />
+<span class="notice" id="screenshot-notice">{"You must enter a screenshot."}</span></p>
+<p>
+	<input type="submit" value="{"Add Theme"}" />&nbsp;
+	<a href="javascript:history.go(-1)">{"Cancel"}</a>
+</p>
+</form>

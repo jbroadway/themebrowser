@@ -11,7 +11,7 @@ $(function () {
 <style>
 .theme {
 	float: left;
-	margin-right: 10px;
+	margin: 0px 40px 30px 40px;
 }
 .thumb {
 	width: 210px;
@@ -40,7 +40,7 @@ $(function () {
 	background: rgba(0,0,0,.6);
 }
 	.thumb-front p {
-		margin: 65px 0px 0px 30px;
+		margin: 65px 0px 0px 37px;
 		padding: 0;
 	}
 	.thumb-front p a {
@@ -87,7 +87,7 @@ $(function () {
 			<img src="/{{ loop_value->screenshot|filemanager_get_thumbnail (%s, 210, 150) }}" />
 		</div>
 		<div class="thumb-front">
-			<p><a href="/{{ loop_value->screenshot }}" class="fancy">Preview</a>
+			<p><a href="/{{ loop_value->screenshot }}" onclick="$('.thumb-front').fadeOut (200)" class="fancy">Preview</a>
 			&nbsp;
 			<a href="{{ loop_value->link }}">Website</a></p>
 		</div>

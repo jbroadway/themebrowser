@@ -68,7 +68,7 @@ $(function () {
 </style>
 
 {% if num > 1 %}
-<p class="previous"><a href="/{{ page.id }}/{{ num }}">&laquo; {" Newer themes "}</a></p>
+<p class="previous"><a href="/{{ page.id }}?num={{ num }}">&laquo; {" Newer themes "}</a></p>
 {% elseif num == 1 %}
 <p class="previous"><a href="/{{ page.id }}">&laquo; {" Newer themes "}</a></p>
 {% end %}
@@ -98,5 +98,5 @@ $(function () {
 <br clear="both" />
 
 {% if more %}
-<p class="next"><a href="/{{ page.id }}/{{ next }}">{" Older themes "} &raquo;</a></p>
+<p class="next"><a href="/{{ page.id }}?num={{ next }}">{" Older themes "} &raquo;</a></p>
 {% end %}

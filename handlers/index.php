@@ -8,7 +8,7 @@ require_once ('apps/filemanager/lib/Functions.php');
 $o = new StdClass;
 
 $o->limit = 10;
-$o->num = (count ($this->params) > 0 && is_numeric ($this->params[0])) ? $this->params[0] - 1 : 0;
+$o->num = isset ($_GET['num']) ? $_GET['num'] : 0;
 $o->offset = $o->num * $o->limit;
 
 $t = new themebrowser\Theme;
